@@ -16,7 +16,10 @@ class PostAPITests(TestCase):
         self.url = reverse("post-list")
 
     def test_create_post(self):
-        data = {"title": "Test Post", "content": "This is a test post content."}
+        data = {
+            "title": "Test Post",
+            "content": "This is a test post content.",
+        }
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Post.objects.count(), 1)
@@ -56,7 +59,10 @@ class PostAPITests(TestCase):
 
     def test_update_nonexistent_post(self):
         url = reverse("post-detail", kwargs={"pk": 999})
-        data = {"title": "Nonexistent Post", "content": "This post does not exist."}
+        data = {
+            "title": "Nonexistent Post",
+            "content": "This post does not exist.",
+        }
         response = self.client.put(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
